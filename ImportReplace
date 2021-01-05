@@ -1,0 +1,18 @@
+Function ImportReplace()
+On Error GoTo Macro1_Err
+
+    DoCmd.SetWarnings False
+    DoCmd.DeleteObject acTable, "DataEntry"
+    DoCmd.TransferDatabase acImport, "Microsoft Access", "\\mh.org\Public\CO\CO - Registry Reporting and Performance Improvement\IRR\FILENAME.accdb", acTable, "DataEntry", "DataEntry", False
+
+
+Macro1_Exit:
+    On Error Resume Next
+    DoCmd.SetWarnings True     'Reenable prompts
+    Exit Function
+
+Macro1_Err:
+    MsgBox Error$
+    Resume Macro1_Exit
+
+End Function
