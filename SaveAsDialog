@@ -1,0 +1,17 @@
+'   Save As Dialogue
+    Dim save_as As Variant
+    Dim file_name As String
+    Dim ProgramName As String
+    file_name = ProgramName
+    ' Get the file name.
+    save_as = Application.GetSaveAsFilename(file_name, _
+        FileFilter:="Excel Files,*.xlsx,All Files,*.*")
+    ' See if the user canceled.
+    If save_as = False Then Exit Sub
+    ' Save the file with the new name.
+    Application.DisplayAlerts = False
+    If LCase$(Right$(save_as, 4)) <> ".xlsx" Then
+        file_name = save_as & ".xlsx"
+    End If
+    ActiveWorkbook.SaveAs Filename:=save_as, FileFormat:= _
+        xlOpenXMLWorkbook, CreateBackup:=False
